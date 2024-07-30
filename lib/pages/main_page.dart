@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/theme.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -26,12 +27,26 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent, // Прозрачный AppBar
         elevation: 0, // Убираем тень
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: Container( // Добавляем Container для градиента
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomCenter,
+            colors: [
+              DoDidDoneTheme.lightTheme.colorScheme.primary,
+              DoDidDoneTheme.lightTheme.colorScheme.secondary,
+            ],
+            stops: const [0.1, 0.9], // Основной цвет занимает 90%
+          ),
+        ),
+        child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent, // Прозрачный BottomNavigationBar
